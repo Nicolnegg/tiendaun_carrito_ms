@@ -287,3 +287,7 @@ C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\MySql.Data.
 C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\Renci.SshNet.dll
 C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\SshNet.Security.Cryptography.dll
 C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\System.Xml.XPath.XmlDocument.dll
+C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\MySqlConnector.dll
+C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.Design.dll

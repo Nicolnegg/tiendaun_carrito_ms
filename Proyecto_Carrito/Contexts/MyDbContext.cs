@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Proyecto_Carrito.Models;
 
 namespace Proyecto_Carrito.Context
 {
@@ -6,12 +7,10 @@ namespace Proyecto_Carrito.Context
     {                                                                                                                                                                                                                 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
         {
-        }
-        public MyDbContext()
-        {
+            ProductosCarritos = new List<Producto_Carrito>();
         }
 
         public DbSet<Carrito>? Carritos { get; set; }
-        public DbSet<Producto_Carrito>? ProductosCarritos { get; set; }
+        public List<Producto_Carrito> ProductosCarritos { get; set; }
     }
 }

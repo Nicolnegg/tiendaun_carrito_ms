@@ -5,11 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Proyecto_Carrito.Context;
-using MySql.Data.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
 
-namespace Proyecto_Carrito
-{
-    public class Startup
+
+public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -20,9 +19,8 @@ namespace Proyecto_Carrito
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyDbContext>(options =>
-                options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllersWithViews();
+            services.AddDbContext<MyDbContext>(options => options.UseMySql(Configuration.GetConnectionString("MySqlConnection")));
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -31,6 +29,11 @@ namespace Proyecto_Carrito
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
-}
