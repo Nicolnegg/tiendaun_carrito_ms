@@ -20,88 +20,75 @@ namespace Proyecto_Carrito.Controllers{
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Carrito>>> Get()
+        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> Get()
         {
 
-            if (_context.Carrito== null)
+            if (_context.Producto_Carrito== null)
             {
                 return NotFound();
             }
-            return await _context.Carrito.ToListAsync();
-                        
+            return await _context.Producto_Carrito.ToListAsync();                       
         }
-        // [HttpPost]
-        // public ActionResult<Producto_Carrito> AgregarProductoCarrito(Producto_Carrito productoCarrito)
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetProductoCarritoById(int id)
+        {
+            if (_context.Producto_Carrito== null)
+            {
+                return NotFound();
+            }
+            var productoCarrito = await (_context.Producto_Carrito).Where(p => p.IdProducto == id).ToListAsync();
+            
+            return  productoCarrito;
+        }
+        
+        [HttpPost]
+        public ActionResult<Producto_Carrito> AgregarProductoCarrito(Producto_Carrito productoCarrito)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if(!_context.Producto_Carrito.Any(p => p.IdCarrito == productoCarrito.IdCarrito)){
+                
+                _context.Producto_Carrito.Add(productoCarrito);
+            }
+            else{
+                var existingProductoCarrito = _context.Producto_Carrito.FirstOrDefault(p => p.IdCarrito == productoCarrito.IdCarrito);
+                existingProductoCarrito.CantProducto += productoCarrito.CantProducto;
+                
+                _context.Entry(existingProductoCarrito).Property(x => x.CantProducto).IsModified = true;
+            }
+            _context.SaveChanges();
+            
+
+
+            return CreatedAtAction(nameof(Get), new { IdProducto = productoCarrito.IdProducto }, productoCarrito);
+        }
+        // [HttpDelete("{id}/{cantidad}")]
+        // public async Task<ActionResult> EliminarProductoCarrito(int id, int cantidad)
         // {
-        //     if (!ModelState.IsValid)
+        //     var productoCarrito = await _context.Producto_Carrito.FindAsync(id);
+
+        //     if (productoCarrito == null)
         //     {
-        //         return BadRequest(ModelState);
+        //         return NotFound();
+        //     }
+        //     if(productoCarrito.CantProducto==1){
+        //         _context.Producto_Carrito.Remove(productoCarrito);
+
+        //     }
+        //     else{
+        //         productoCarrito.CantProducto = productoCarrito.CantProducto-cantidad;
+        //         _context.Entry(productoCarrito).Property(x => x.Nombre).IsModified = true;
         //     }
 
-        //     _context.ProductosCarritos.Add(productoCarrito);
-        //     _context.SaveChanges();
+            
+        //     await _context.SaveChangesAsync();
 
-        //     return CreatedAtAction(nameof(Get), new { IdProducto = productoCarrito.IdProducto }, productoCarrito);
+        //     return Ok();
         // }
-        // private readonly List<Producto_Carrito> _productosCarrito;
-
-        // public CarritoController()
-        // {
-        //     _productosCarrito = new List<Producto_Carrito>();
-        //     Console.WriteLine(_productosCarrito);
-        // }        
-        // [HttpGet]
-        //     public IActionResult ObtenerProductos()
-        //     {
-        //         Console.WriteLine("Consulta");
-        //         return Ok(_productosCarrito);
-        //     }
 
     }
-
-    // public class CarritoController : ControllerBase
-    // {
-
-    //     private readonly List<Producto_Carrito> _productosCarrito;
-
-    //     public CarritoController()
-    //     {
-    //         _productosCarrito = new List<Producto_Carrito>();
-    //         Console.WriteLine(_productosCarrito);
-    //     }
-
-
-    //     [HttpPost]
-    //     public IActionResult AgregarProducto([FromBody] Producto_Carrito producto)
-    //     {
-    //         Console.WriteLine("AQUI");    
-    //         _productosCarrito.Add(producto);
-    //         Console.WriteLine(_productosCarrito);
-    //         return Ok();
-    //     }
-
-    //     [HttpDelete("{idProducto}")]
-    //     public IActionResult EliminarProducto(long idProducto)
-    //     {
-    //         Console.WriteLine("elimina");
-    //         var productoAEliminar = _productosCarrito.FirstOrDefault(p => p.IdProducto == idProducto);
-    //         if (productoAEliminar != null)
-    //         {
-    //             _productosCarrito.Remove(productoAEliminar);
-    //             return Ok();
-    //         }
-    //         else
-    //         {
-    //             return NotFound();
-    //         }
-    //     }
-    //     [HttpGet]
-    //     public IActionResult ObtenerProductos()
-    //     {
-    //         Console.WriteLine("Consulta");
-    //         return Ok(_productosCarrito);
-    //     }
-
-    // }
 
 }
