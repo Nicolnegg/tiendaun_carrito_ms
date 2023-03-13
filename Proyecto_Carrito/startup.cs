@@ -20,7 +20,7 @@ public class Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = "server=localhost;port=8081;database=TiendaUn_Carrito;user=Nicol;password=123;default command timeout=120;SslMode=none;Max Pool Size=300";
+            var connectionString = "server=localhost;port=3306;database=tiendaun_carrito;user=root;password=;SslMode=none;Max Pool Size=300";
 
             services.AddDbContext<MyDbContext>(
                 dbContextOptions => dbContextOptions
