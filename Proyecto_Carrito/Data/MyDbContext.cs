@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Proyecto_Carrito.Models;
 
-namespace Proyecto_Carrito.Context
+namespace Proyecto_Carrito.Data
 {
     public class MyDbContext : DbContext
     {                                                                                                                                                                                                                 
@@ -11,7 +11,12 @@ namespace Proyecto_Carrito.Context
 
         public DbSet<Carrito>? Carrito { get; set; }
         public DbSet<Producto_Carrito>? Producto_Carrito { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Carrito>().ToTable("Carrito");
+            modelBuilder.Entity<Producto_Carrito>().ToTable("Producto_Carrito");
+        }
     }
+}
 
     
-}

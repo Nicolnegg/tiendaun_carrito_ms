@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Proyecto_Carrito.Context;
 using Pomelo.EntityFrameworkCore.MySql;
 using MySql.Data.EntityFrameworkCore;
+using Proyecto_Carrito.Data;
 
 
 public class Startup
@@ -20,7 +20,19 @@ public class Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("MySqlConnection")));
+            var connectionString = "server=localhost;port=8081;database=TiendaUn_Carrito;user=Nicol;password=123;default command timeout=120;SslMode=none;Max Pool Size=300";
+
+            services.AddDbContext<MyDbContext>(
+                dbContextOptions => dbContextOptions
+                .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), options => options.EnableRetryOnFailure(
+                    maxRetryCount: 15,
+                    maxRetryDelay: System.TimeSpan.FromSeconds(30),
+                    errorNumbersToAdd: null)
+                )
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
+            );
             services.AddControllers();
             services.AddCors(options =>
             {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Proyecto_Carrito.Models;
 using System.Collections.Generic;
-using Proyecto_Carrito.Context;
+using Proyecto_Carrito.Data;
 
 namespace Proyecto_Carrito.Controllers{
 
@@ -20,18 +20,15 @@ namespace Proyecto_Carrito.Controllers{
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Carrito>> GetCarritos()
+        public async Task<ActionResult<IEnumerable<Carrito>>> Get()
         {
-            Console.WriteLine("entro");
-            if (_context.Carrito != null) 
+
+            if (_context.Carrito== null)
             {
-                var productosCarritos = _context.Carrito.ToList();
-                return Ok(productosCarritos);
-            }
-            else{
                 return NotFound();
             }
-            
+            return await _context.Carrito.ToListAsync();
+                        
         }
         // [HttpPost]
         // public ActionResult<Producto_Carrito> AgregarProductoCarrito(Producto_Carrito productoCarrito)
