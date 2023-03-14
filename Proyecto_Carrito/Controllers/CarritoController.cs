@@ -49,22 +49,50 @@ namespace Proyecto_Carrito.Controllers{
             {
                 return BadRequest(ModelState);
             }
-            if(!_context.Producto_Carrito.Any(p => p.IdCarrito == productoCarrito.IdCarrito)){
-                
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            if(!_context.Producto_Carrito.Any(p => p.IdProducto == productoCarrito.IdProducto)){
+                Console.WriteLine("AGRGAR");
                 _context.Producto_Carrito.Add(productoCarrito);
+                _context.SaveChanges();
             }
             else{
-                var existingProductoCarrito = _context.Producto_Carrito.FirstOrDefault(p => p.IdCarrito == productoCarrito.IdCarrito);
-                existingProductoCarrito.CantProducto += productoCarrito.CantProducto;
-                
-                _context.Entry(existingProductoCarrito).Property(x => x.CantProducto).IsModified = true;
+                var existingProductoCarrito = _context.Producto_Carrito.FirstOrDefault(p => p.IdProducto == productoCarrito.IdProducto);
+                if(existingProductoCarrito== null){
+                    return NotFound();
+                }
+                existingProductoCarrito.CantProducto += productoCarrito.CantProducto;                
+                Console.WriteLine("CANTIDAD");
+                _context.SaveChanges();
             }
-            _context.SaveChanges();
             
-
-
+        
             return CreatedAtAction(nameof(Get), new { IdProducto = productoCarrito.IdProducto }, productoCarrito);
         }
+        
+        [HttpPut("{idProducto}")]
+        public IActionResult ActualizarProductoCarrito(int idProducto, [FromBody] Producto_Carrito productoCarrito)
+        {
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            var actualproducto = _context.Producto_Carrito.FirstOrDefault(p => p.IdProducto == idProducto);
+
+            if (actualproducto == null)
+            {
+                return NotFound();
+            }
+
+            actualproducto.CantProducto += productoCarrito.CantProducto;
+
+            _context.SaveChanges();
+
+            return Ok("actualizado");
+        }
+
         // [HttpDelete("{id}/{cantidad}")]
         // public async Task<ActionResult> EliminarProductoCarrito(int id, int cantidad)
         // {

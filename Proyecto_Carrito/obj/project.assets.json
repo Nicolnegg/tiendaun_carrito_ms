@@ -9754,19 +9754,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\princ\\.nuget\\packages\\": {}
+    "C:\\Users\\Nicol\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\princ\\OneDrive\\Documentos\\Arquisoft\\ArquiSoft\\Proyecto_Carrito\\Proyecto_Carrito.csproj",
+      "projectUniqueName": "C:\\Users\\Nicol\\Documents\\ArquiSoft\\Proyecto_Carrito\\Proyecto_Carrito.csproj",
       "projectName": "Proyecto_Carrito",
-      "projectPath": "C:\\Users\\princ\\OneDrive\\Documentos\\Arquisoft\\ArquiSoft\\Proyecto_Carrito\\Proyecto_Carrito.csproj",
-      "packagesPath": "C:\\Users\\princ\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\princ\\OneDrive\\Documentos\\Arquisoft\\ArquiSoft\\Proyecto_Carrito\\obj\\",
+      "projectPath": "C:\\Users\\Nicol\\Documents\\ArquiSoft\\Proyecto_Carrito\\Proyecto_Carrito.csproj",
+      "packagesPath": "C:\\Users\\Nicol\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nicol\\Documents\\ArquiSoft\\Proyecto_Carrito\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\princ\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Nicol\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
