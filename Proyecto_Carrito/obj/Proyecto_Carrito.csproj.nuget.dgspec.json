@@ -14,13 +14,16 @@
         "outputPath": "C:\\Users\\Nicol\\Documents\\ArquiSoft\\Proyecto_Carrito\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
+          "C:\\Users\\Nicol\\Documents\\ArquiSoft\\Proyecto_Carrito\\NuGet.Config",
           "C:\\Users\\Nicol\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.payulatam.com/nuget/PayU": {}
         },
         "frameworks": {
           "net7.0": {

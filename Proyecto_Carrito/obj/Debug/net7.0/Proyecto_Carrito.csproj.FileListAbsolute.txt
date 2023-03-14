@@ -324,3 +324,4 @@ C:\Users\princ\OneDrive\Documentos\Arquisoft\ArquiSoft\Proyecto_Carrito\obj\Debu
 C:\Users\princ\OneDrive\Documentos\Arquisoft\ArquiSoft\Proyecto_Carrito\obj\Debug\net7.0\Proyecto_Carrito.pdb
 C:\Users\princ\OneDrive\Documentos\Arquisoft\ArquiSoft\Proyecto_Carrito\obj\Debug\net7.0\Proyecto_Carrito.genruntimeconfig.cache
 C:\Users\princ\OneDrive\Documentos\Arquisoft\ArquiSoft\Proyecto_Carrito\obj\Debug\net7.0\ref\Proyecto_Carrito.dll
+C:\Users\Nicol\Documents\ArquiSoft\Proyecto_Carrito\bin\Debug\net7.0\nuget.config
