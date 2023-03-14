@@ -10,9 +10,8 @@ COPY . .
 RUN dotnet publish -c Release -o /app --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/runtime:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build /app .
-EXPOSE 80
 EXPOSE 3003
 ENTRYPOINT ["dotnet", "Proyecto_Carrito.dll"]
