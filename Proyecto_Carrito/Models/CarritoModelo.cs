@@ -19,7 +19,8 @@ namespace Proyecto_Carrito.Models{
 
     public class Producto_Carrito
     {
-        
+        [Key]
+        public int IdProducto_Carrito { get; set; }
         public int IdProducto { get; set; }
         
         public int IdCarrito { get; set; }

@@ -15,7 +15,6 @@ namespace Proyecto_Carrito.Data
         {
             modelBuilder.Entity<Carrito>().ToTable("Carrito");
             modelBuilder.Entity<Producto_Carrito>().ToTable("Producto_Carrito");
-            modelBuilder.Entity<Producto_Carrito>().HasNoKey();
         }
     }
 }
