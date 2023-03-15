@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8OKWKCWhpfGCeGiBe2A5k3sjlVxgUO9KX6ye9ReEJMDaEbRgbxA9qSg+elCq9NaKUvRbRK6HQ7LMOBiY1ctV+g==",
+  "dgSpecHash": "t3XPQNYaCrdkrNJufXl7ccx7utXP3ALVUcNTh0uG+NTeZG3t5IyYNvkDaJcpsOBJWnCo3k8X+tf67gFEz3KSNw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nicol\\Documents\\ArquiSoft\\Proyecto_Carrito\\Proyecto_Carrito.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,7 @@
     "C:\\Users\\Nicol\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.2\\microsoft.entityframeworkcore.relational.7.0.2.nupkg.sha512",
     "C:\\Users\\Nicol\\.nuget\\packages\\microsoft.entityframeworkcore.relational.design\\1.1.1\\microsoft.entityframeworkcore.relational.design.1.1.1.nupkg.sha512",
     "C:\\Users\\Nicol\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.2\\microsoft.entityframeworkcore.sqlserver.7.0.2.nupkg.sha512",
+    "C:\\Users\\Nicol\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.2\\microsoft.entityframeworkcore.tools.7.0.2.nupkg.sha512",
     "C:\\Users\\Nicol\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\Nicol\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "C:\\Users\\Nicol\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
