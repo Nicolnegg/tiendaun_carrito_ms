@@ -1,0 +1,42 @@
+version: '7.0'
+
+services:
+  db:
+        # get the image
+        image: mysql
+        # define the container name
+        container_name: "tienda_db_cliente"
+        # set up the envinronment
+        environment:
+          MYSQL_DATABASE: 'tiendaun_carrito'
+          # Set up a user
+          MYSQL_USER: 'Nicol'
+          # Set up the password
+          MYSQL_PASSWORD: '123'
+          # Password for root access
+          MYSQL_ROOT_PASSWORD: '123'
+        # persists the data outside the container
+        volumes:
+          - ./data:/var/lib/mysql
+        # map the ports host:container
+        ports:
+          - "3307:3307"
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin
+    restart: always
+    ports:
+      - '8082:80'
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: 123
+
+
+  proyecto-carrito:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
