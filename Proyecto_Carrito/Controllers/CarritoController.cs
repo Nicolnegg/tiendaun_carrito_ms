@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using Proyecto_Carrito.Models;
-using System.Collections.Generic;
 using Proyecto_Carrito.Data;
 
 namespace Proyecto_Carrito.Controllers{

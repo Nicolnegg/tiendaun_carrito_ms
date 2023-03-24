@@ -1,11 +1,5 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Pomelo.EntityFrameworkCore.MySql;
-using MySql.Data.EntityFrameworkCore;
 using Proyecto_Carrito.Data;
 
 
