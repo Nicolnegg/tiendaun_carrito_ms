@@ -54,7 +54,7 @@ namespace Proyecto_Carrito.Controllers{
             if(!_context.Producto_Carrito.Any(p => p.IdProducto == productoCarrito.IdProducto && p.IdCarrito == productoCarrito.IdCarrito)){
                 _context.Producto_Carrito.Add(productoCarrito);
                 _context.SaveChanges();
-                return Ok("Fue agregado el producto");
+                return Ok(productoCarrito);
             }
             else{
                 var actualproducto = _context.Producto_Carrito.FirstOrDefault(p => p.IdProducto == productoCarrito.IdProducto && p.IdCarrito == productoCarrito.IdCarrito);
@@ -67,7 +67,7 @@ namespace Proyecto_Carrito.Controllers{
                 actualproducto.CantProducto += productoCarrito.CantProducto;
                 _context.Entry(actualproducto).Property(x => x.CantProducto).IsModified = true;
                 _context.SaveChanges();
-                return Ok("Se actualizo la cantidad");
+                return Ok(productoCarrito);
             }
             
         }
@@ -90,7 +90,7 @@ namespace Proyecto_Carrito.Controllers{
             _context.Entry(actualproducto).Property(x => x.CantProducto).IsModified = true;
             _context.SaveChanges();
 
-            return Ok("actualizado");
+            return Ok(actualproducto);
         }
 
         [HttpDelete("productocarrito/{idProducto}")]
@@ -110,7 +110,7 @@ namespace Proyecto_Carrito.Controllers{
             
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(actualproducto);
         }
         [HttpDelete("productocarrito/{idProducto}/{cantidad}")]
         public async Task<ActionResult> EliminarCantProductoCarrito(int idProducto,int cantidad, [FromBody] Producto_Carrito productoCarrito)
@@ -135,9 +135,20 @@ namespace Proyecto_Carrito.Controllers{
                 _context.Entry(actualproducto).Property(x => x.CantProducto).IsModified = true;
                 _context.SaveChanges();
             }
-            return Ok();
+            return Ok(actualproducto);
         }
         //http de TABLA CARRITO
+        [HttpGet("carrito/{idcarrito}")]
+        public async Task<ActionResult<IEnumerable<Carrito>>> GetByIdCarrito(int idcarrito)
+        {
+            if (_context.Carrito == null)
+            {
+                return NotFound();
+            }
+            var carrito = await (_context.Carrito).Where(p => p.IdCarrito == idcarrito).ToListAsync();
+            return carrito;
+        }
+        
         [HttpGet("carrito")]
         public async Task<ActionResult<IEnumerable<Carrito>>> GetCarrito()
         {
@@ -148,6 +159,7 @@ namespace Proyecto_Carrito.Controllers{
             }
             return await _context.Carrito.ToListAsync();
         }
+
         [HttpPost("carrito")]
         public ActionResult<Producto_Carrito> CrearCarrito(Carrito carrito)
         {
@@ -199,14 +211,14 @@ namespace Proyecto_Carrito.Controllers{
                 carrito.Totalprecio = 0;
                 carrito.Totalproductos = 0;
                 _context.SaveChanges();
-                return Ok("actualizado");
+                return Ok(carrito);
             }
             carrito.Totalprecio = camposcarrito.TotalPrecio;
             carrito.Totalproductos = camposcarrito.TotalProductos;
             // _context.Entry(actualproducto).Property(x => x.CantProducto).IsModified = true;
             _context.SaveChanges();
 
-            return Ok("actualizado");
+            return Ok(carrito);
         }
         
         [HttpDelete("carrito/{idcarrito}")]
@@ -226,7 +238,7 @@ namespace Proyecto_Carrito.Controllers{
 
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(actualcarrito);
         }
         
 
