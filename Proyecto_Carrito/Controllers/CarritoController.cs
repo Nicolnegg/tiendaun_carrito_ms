@@ -264,21 +264,21 @@ namespace Proyecto_Carrito.Controllers{
             {
                 return NotFound();
             }
-            var productoCarrito = await (_context.Transacciones).Where(p => p.IdTransaccion == id).ToListAsync();
+            var transaccion = await (_context.Transacciones).Where(p => p.IdTransaccion == id).ToListAsync();
 
-            return productoCarrito;
+            return transaccion;
         }
         //Get de todas las transaciones por el id del carrito
-        [HttpGet("transacciones/{idcarrito}")]
+        [HttpGet("transacciones/carrito/{idcarrito}")]
         public async Task<ActionResult<IEnumerable<Transacciones>>> GetTransaccionesByIdCarrito(int idcarrito)
         {
             if (_context.Transacciones == null)
             {
                 return NotFound();
             }
-            var productoCarrito = await (_context.Transacciones).Where(p => p.IdCarrito == id).ToListAsync();
+            var transaccionesDECarrito = await (_context.Transacciones).Where(p => p.IdCarrito == idcarrito).ToListAsync();
 
-            return productoCarrito;
+            return transaccionesDECarrito;
         }
         //Post una nueva transaccion
         [HttpPost("transacciones")]
@@ -319,7 +319,6 @@ namespace Proyecto_Carrito.Controllers{
 
             return Ok(transaccion);
         }
-
 
     }
 

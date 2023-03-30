@@ -31,11 +31,15 @@ namespace Proyecto_Carrito.Models{
     }
     public class Transacciones
     {
+        public Transacciones()
+        {
+            estadoTransaccion = "Pendiente"; // Valor por defecto asignado al estado de transacción
+        }
         [Key]
         public int IdTransaccion { get; set; }
         public int IdCarrito { get; set; }
 
-        public int estadoTransaccion { get; set; }
+        public string estadoTransaccion { get; set; }
 
         public int pagoTotal { get; set; }
 
