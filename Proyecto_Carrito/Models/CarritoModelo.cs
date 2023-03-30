@@ -29,6 +29,17 @@ namespace Proyecto_Carrito.Models{
 
 
     }
+    public class Transacciones
+    {
+        [Key]
+        public int IdTransaccion { get; set; }
+        public int IdCarrito { get; set; }
+
+        public int estadoTransaccion { get; set; }
+
+        public int pagoTotal { get; set; }
+
+    }
 }
 
 

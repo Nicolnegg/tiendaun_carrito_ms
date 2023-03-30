@@ -11,6 +11,7 @@ namespace Proyecto_Carrito.Data
 
         public DbSet<Carrito>? Carrito { get; set; }
         public DbSet<Producto_Carrito>? Producto_Carrito { get; set; }
+        public DbSet<Producto_Carrito>? Transacciones { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }
