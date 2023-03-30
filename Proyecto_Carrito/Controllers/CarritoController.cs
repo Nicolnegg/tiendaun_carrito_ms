@@ -137,7 +137,9 @@ namespace Proyecto_Carrito.Controllers{
             }
             return Ok(actualproducto);
         }
+
         //http de TABLA CARRITO
+
         [HttpGet("carrito/{idcarrito}")]
         public async Task<ActionResult<IEnumerable<Carrito>>> GetByIdCarrito(int idcarrito)
         {
@@ -240,7 +242,42 @@ namespace Proyecto_Carrito.Controllers{
 
             return Ok(actualcarrito);
         }
-        
+
+        //http de TABLA TRANSACCIONES
+
+        [HttpGet("transacciones")]
+        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetTransacciones()
+        {
+
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            return await _context.Producto_Carrito.ToListAsync();
+        }
+
+        [HttpGet("productocarrito/{id}")]
+        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetTransaccionById(int id)
+        {
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            var productoCarrito = await (_context.Producto_Carrito).Where(p => p.IdProducto == id).ToListAsync();
+
+            return productoCarrito;
+        }
+        [HttpGet("productocarrito/{id}")]
+        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetTransaccionesByIdCarrito(int id)
+        {
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            var productoCarrito = await (_context.Producto_Carrito).Where(p => p.IdProducto == id).ToListAsync();
+
+            return productoCarrito;
+        }
 
     }
 
