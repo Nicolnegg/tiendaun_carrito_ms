@@ -245,39 +245,81 @@ namespace Proyecto_Carrito.Controllers{
 
         //http de TABLA TRANSACCIONES
 
+        //Get de todas las transaciones
         [HttpGet("transacciones")]
-        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetTransacciones()
+        public async Task<ActionResult<IEnumerable<Transacciones>>> GetTransacciones()
         {
 
-            if (_context.Producto_Carrito == null)
+            if (_context.Transacciones == null)
             {
                 return NotFound();
             }
-            return await _context.Producto_Carrito.ToListAsync();
+            return await _context.Transacciones.ToListAsync();
         }
-
-        [HttpGet("productocarrito/{id}")]
-        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetTransaccionById(int id)
+        //Get de una transaccion por su id, id de la transaccion
+        [HttpGet("transacciones/{id}")]
+        public async Task<ActionResult<IEnumerable<Transacciones>>> GetTransaccionById(int id)
         {
-            if (_context.Producto_Carrito == null)
+            if (_context.Transacciones == null)
             {
                 return NotFound();
             }
-            var productoCarrito = await (_context.Producto_Carrito).Where(p => p.IdProducto == id).ToListAsync();
+            var productoCarrito = await (_context.Transacciones).Where(p => p.IdTransaccion == id).ToListAsync();
 
             return productoCarrito;
         }
-        [HttpGet("productocarrito/{id}")]
-        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetTransaccionesByIdCarrito(int id)
+        //Get de todas las transaciones por el id del carrito
+        [HttpGet("transacciones/{idcarrito}")]
+        public async Task<ActionResult<IEnumerable<Transacciones>>> GetTransaccionesByIdCarrito(int idcarrito)
         {
-            if (_context.Producto_Carrito == null)
+            if (_context.Transacciones == null)
             {
                 return NotFound();
             }
-            var productoCarrito = await (_context.Producto_Carrito).Where(p => p.IdProducto == id).ToListAsync();
+            var productoCarrito = await (_context.Transacciones).Where(p => p.IdCarrito == id).ToListAsync();
 
             return productoCarrito;
         }
+        //Post una nueva transaccion
+        [HttpPost("transacciones")]
+        public ActionResult<Transacciones> CrearTransaccion(Transacciones transaccion)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_context.Transacciones == null)
+            {
+                return NotFound();
+            }
+            if(!_context.Transacciones.Any(p => p.IdTransaccion == transaccion.IdTransaccion)){
+                _context.Transacciones.Add(transaccion);
+                _context.SaveChanges();
+                return Ok(transaccion);
+            }
+            return NotFound();          
+        }
+        //Delete transaccion por su id de transaccion
+        [HttpDelete("transacciones/{id}")]
+        public async Task<ActionResult> EliminarTransaccion(int id)
+        {
+            if (_context.Transacciones == null)
+            {
+                return NotFound();
+            }
+            var transaccion = _context.Transacciones.FirstOrDefault(p => p.IdTransaccion == id);
+
+            if (transaccion == null)
+            {
+                return NotFound();
+            }
+            _context.Transacciones.Remove(transaccion);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(transaccion);
+        }
+
 
     }
 
