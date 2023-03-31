@@ -27,8 +27,19 @@ namespace Proyecto_Carrito.Controllers{
             }
             return await _context.Producto_Carrito.ToListAsync();                       
         }
-
         [HttpGet("productocarrito/{id}")]
+        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetProductoCarritoById(int id)
+        {
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            var productoCarrito = await (_context.Producto_Carrito).Where(p => p.IdProducto_Carrito == id).ToListAsync();
+
+            return productoCarrito;
+        }
+
+        [HttpGet("productocarrito/producto/{id}")]
         public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetProductoCarritoByIdProducto(int id)
         {
             if (_context.Producto_Carrito== null)
@@ -93,8 +104,27 @@ namespace Proyecto_Carrito.Controllers{
             return Ok(actualproducto);
         }
 
-        [HttpDelete("productocarrito/{idProducto}")]
-        public async Task<ActionResult> EliminarProductoCarrito(int idProducto, [FromBody] Producto_Carrito productoCarrito)
+        [HttpDelete("productocarrito/{id}")]
+        public async Task<ActionResult> EliminarProductoById(int id)
+        {
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            var actualproducto = _context.Producto_Carrito.FirstOrDefault(p => p.IdProducto_Carrito == id );
+
+            if (actualproducto == null)
+            {
+                return NotFound();
+            }
+            _context.Producto_Carrito.Remove(actualproducto);
+            
+            await _context.SaveChangesAsync();
+
+            return Ok(actualproducto);
+        }
+        [HttpDelete("productocarrito/producto/{idProducto}")]
+        public async Task<ActionResult> EliminarIdProductoDelCarrito(int idProducto, [FromBody] Producto_Carrito productoCarrito)
         {
             if (_context.Producto_Carrito == null)
             {
@@ -107,7 +137,7 @@ namespace Proyecto_Carrito.Controllers{
                 return NotFound();
             }
             _context.Producto_Carrito.Remove(actualproducto);
-            
+
             await _context.SaveChangesAsync();
 
             return Ok(actualproducto);
@@ -125,7 +155,7 @@ namespace Proyecto_Carrito.Controllers{
             {
                 return NotFound();
             }
-            if(actualproducto.CantProducto == cantidad){
+            if(actualproducto.CantProducto-cantidad <0){
                 _context.Producto_Carrito.Remove(actualproducto);
 
                 await _context.SaveChangesAsync();
@@ -134,6 +164,7 @@ namespace Proyecto_Carrito.Controllers{
                 actualproducto.CantProducto -= cantidad;
                 _context.Entry(actualproducto).Property(x => x.CantProducto).IsModified = true;
                 _context.SaveChanges();
+                
             }
             return Ok(actualproducto);
         }
