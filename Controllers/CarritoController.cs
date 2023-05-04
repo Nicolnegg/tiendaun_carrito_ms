@@ -51,6 +51,17 @@ namespace Proyecto_Carrito.Controllers
 
             return productoCarrito;
         }
+        [HttpGet("productocarrito/carrito/{idcarrito}")]
+        public async Task<ActionResult<IEnumerable<Producto_Carrito>>> GetProductoCarritoByIdCarrito(int idcarrito)
+        {
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+            var productosenCarrito = await (_context.Producto_Carrito).Where(p => p.IdCarrito == idcarrito).ToListAsync();
+
+            return productosenCarrito;
+        }
 
         [HttpPost("productocarrito")]
         public ActionResult<Producto_Carrito> AgregarProductoCarrito(Producto_Carrito productoCarrito)
