@@ -184,6 +184,25 @@ namespace Proyecto_Carrito.Controllers
             }
             return Ok(actualproducto);
         }
+        [HttpDelete("productocarrito/carrito/{idCarrito}")]
+        public async Task<ActionResult> EliminarProductosDelCarrito_IDCarrito(int idCarrito)
+        {
+            if (_context.Producto_Carrito == null)
+            {
+                return NotFound();
+            }
+
+            var carrito = await (_context.Producto_Carrito).Where(p => p.IdCarrito == idCarrito).ToListAsync();
+            if (carrito == null)
+            {
+                return NotFound();
+            }
+            _context.Producto_Carrito.RemoveRange(carrito);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(idCarrito);
+        }
 
         //http de TABLA CARRITO
 
